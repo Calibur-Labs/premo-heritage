@@ -59,26 +59,25 @@ export default function GuestStoriesSection() {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 7500,
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 0,
-    cssEase: "linear",
-    pauseOnHover: false,
+    autoplaySpeed: 3000,  // wait 3s between slides
+    speed: 600,
+    cssEase: "ease-in-out",
     arrows: false,
+    pauseOnHover: false,
+    swipe: false,
+    draggable: false,
+    rtl: false,
     responsive: [
       {
         breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-        },
+        settings: { slidesToShow: 2 },
       },
       {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-        },
+        breakpoint: 640,
+        settings: { slidesToShow: 1 },
       },
     ],
   };
@@ -86,9 +85,15 @@ export default function GuestStoriesSection() {
   return (
     <section className="bg-[#FAF6EF] py-20 px-10 md:px-20">
       {/* Section Heading */}
-      <h2 className="text-5xl md:text-6xl font-black font-primary text-primary text-center mb-12">
-        Guest Stories
-      </h2>
+      <div className="text-center mb-8">
+        <h2 className="text-5xl md:text-6xl font-black font-primary text-primary">
+          Guest Stories
+        </h2>
+        <p className="max-w-2xl mx-auto mt-3 text-gray-600 text-lg leading-7 font-primary">
+          Discover heartfelt experiences shared by guests who embraced the warmth,
+          heritage, and timeless charm of Premo Heritage Villa.
+        </p>
+      </div>
 
       {/* Slider */}
       <div className="max-w-6xl mx-auto pb-16">
@@ -96,7 +101,7 @@ export default function GuestStoriesSection() {
           {testimonials.map((t, i) => (
             <div key={i} className="px-3">
               <div className="bg-white rounded-2xl p-8 flex flex-col shadow-sm border border-[#ede8df] relative">
-                {/* Quote Icon — top left */}
+                {/* Quote Icon */}
                 <div className="absolute top-6 left-6">
                   <img
                     src="/quote.png"
@@ -105,7 +110,7 @@ export default function GuestStoriesSection() {
                   />
                 </div>
 
-                {/* Avatar — centered */}
+                {/* Avatar */}
                 <div className="flex justify-center mt-2 mb-6">
                   <div className="w-20 h-20 rounded-full overflow-hidden border-[3px] border-[#C9A84C] flex items-center justify-center bg-[#e8ddd0] flex-shrink-0">
                     <img
@@ -125,10 +130,10 @@ export default function GuestStoriesSection() {
 
                 {/* Quote Text */}
                 <p className="text-gray-800 font-semibold text-[17px] leading-7 mb-8 flex-1 font-primary italic text-left">
-                    &ldquo;{t.quote}&rdquo;
+                  &ldquo;{t.quote}&rdquo;
                 </p>
 
-                {/* Name & Location — centered */}
+                {/* Name & Location */}
                 <div className="text-center mt-auto">
                   <p className="text-sm font-semibold text-gray-800 leading-tight">
                     {t.name}
