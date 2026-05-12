@@ -2,12 +2,14 @@ import Image from "next/image";
 
 const faqItems = [
   {
-    question: "What makes Premo Heritage Villa different from other luxury stays?",
+    question:
+      "What makes Premo Heritage Villa different from other luxury stays?",
     answer:
       "The villa is designed as a quiet heritage retreat. Guests stay close to nature while still experiencing refined hospitality, curated interiors, and a slower, more intentional rhythm of travel.",
   },
   {
-    question: "Is the villa suitable for family stays and small private groups?",
+    question:
+      "Is the villa suitable for family stays and small private groups?",
     answer:
       "Yes. The property works well for couples, families, and intimate gatherings looking for privacy, generous shared spaces, and a more personal hospitality experience.",
   },
@@ -22,12 +24,14 @@ const faqItems = [
       "The villa is welcoming year-round. The ideal time depends on whether you prefer sunnier days for outdoor lounging or a greener seasonal atmosphere with softer, misty landscapes.",
   },
   {
-    question: "Can the team help with transport or itinerary planning?",
+    question:
+      "Can the team help with transport or itinerary planning?",
     answer:
       "Yes. Guests can receive support with transfers, day planning, and nearby recommendations so the stay feels seamless from arrival to departure.",
   },
   {
-    question: "Is the property focused on relaxation or exploration?",
+    question:
+      "Is the property focused on relaxation or exploration?",
     answer:
       "Both. Some guests come to fully switch off, while others use the villa as a base for discovering nearby scenery, culture, and slower local experiences.",
   },
@@ -37,127 +41,142 @@ const galleryImages = [
   {
     src: "/container1.png",
     alt: "Tropical villa exterior and infinity pool",
-    className: "min-h-[180px] sm:min-h-[220px]",
   },
   {
     src: "/container2.png",
     alt: "Traditional heritage hospitality experience",
-    className: "min-h-[180px] sm:min-h-[220px]",
   },
   {
     src: "/container3.png",
     alt: "Villa view framed by warm evening light",
-    className: "min-h-[140px] sm:min-h-[170px]",
   },
   {
     src: "/container4.png",
     alt: "Warm balcony hospitality setting",
-    className: "min-h-[180px] sm:min-h-[220px]",
   },
 ];
 
+function SectionHeading({
+  label,
+  title,
+  description,
+}: {
+  label?: string;
+  title: string;
+  description?: string;
+}) {
+  return (
+    <div className="max-w-2xl">
+      {label && (
+        <p className="mb-4 font-secondary text-sm uppercase tracking-[0.3em] text-[#C9A84C]">
+          {label}
+        </p>
+      )}
+
+      <h2 className="mb-6 font-primary text-5xl font-black leading-[1] text-primary md:text-6xl">
+        {title}
+      </h2>
+
+      {description && (
+        <p className="font-secondary leading-relaxed text-gray-600 sm:text-base">
+          {description}
+        </p>
+      )}
+    </div>
+  );
+}
+
+function Paragraph({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="mt-5 font-secondary leading-relaxed text-gray-600 sm:text-base">
+      {children}
+    </p>
+  );
+}
+
 export default function About() {
   return (
-    <main className="bg-[#fbf6ee] text-[#433227]">
-      <section className="relative min-h-[88vh] overflow-hidden">
+    <main className="bg-white text-[#433227]">
+
+      {/* HERO SECTION */}
+      <section className="relative min-h-screen overflow-hidden">
         <Image
           src="/aboutHome.png"
           alt="Premo Heritage Villa overlooking a lush tropical landscape"
           fill
           priority
           className="object-cover"
-          sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/20 to-[#1c1207]/55" />
-        <div className="relative mx-auto flex min-h-[88vh] max-w-7xl items-end px-6 pb-16 pt-32 sm:px-8 md:pb-24 lg:px-12">
-          <div className="max-w-3xl">
-            <p className="font-secondary text-xs uppercase tracking-[0.45em] text-[#dbc59a]">
-              Premo Heritage Villa
-            </p>
-            <h1 className="mt-4 max-w-2xl font-primary text-5xl leading-[0.95] text-white sm:text-6xl md:text-7xl">
-              A sanctuary shaped by landscape, legacy, and quiet luxury.
-            </h1>
-            <p className="mt-6 max-w-xl font-secondary text-sm leading-7 text-white/80 sm:text-base">
-              Our story is rooted in Sri Lankan warmth, slow living, and a
-              hospitality experience designed to feel intimate rather than
-              performative.
-            </p>
-          </div>
-        </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 py-18 sm:px-8 lg:px-12">
-        <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-          <div className="relative mx-auto w-full max-w-[360px]">
-            <div className="absolute -left-5 -top-5 h-16 w-16 rounded-full border border-[#b99863]/60" />
-            <div className="rounded-[28px] bg-[#111111] p-3 shadow-[0_24px_60px_rgba(43,24,13,0.16)]">
-              <div className="overflow-hidden rounded-[22px]">
-                <Image
-                  src="/founder.png"
-                  alt="Premo Heritage portrait-inspired visual"
-                  width={720}
-                  height={900}
-                  className="h-auto w-full object-cover"
-                  sizes="(max-width: 768px) 100vw, 360px"
-                />
-              </div>
-            </div>
+      {/* FOUNDER STORY SECTION */}
+      <section className="px-6 py-24 md:px-10">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-4">
+
+          <div>
+            <img
+              src="/founder.png"
+              alt="Premo Heritage portrait-inspired visual"
+              className="h-auto w-full object-cover lg:pr-16"
+            />
           </div>
 
-          <div className="max-w-2xl">
-            <div className="mb-4 h-px w-16 bg-[#b99863]" />
-            <p className="font-secondary text-xs uppercase tracking-[0.4em] text-[#9e7a49]">
-              Our Story
-            </p>
-            <h2 className="mt-3 font-primary text-4xl leading-tight text-[#8b1a1a] sm:text-5xl">
-              A Legacy Built Across Continents
-            </h2>
-            <p className="mt-5 font-secondary text-sm leading-7 text-[#6a5648] sm:text-base">
+          <div className="lg:pl-6">
+            <SectionHeading
+              label="The Founder"
+              title="A Legacy Built Across Continents"
+            />
+
+            <Paragraph>
               Premo Heritage Villa was conceived as more than a place to stay.
               It was imagined as a home where architecture, atmosphere, and
               service would carry the depth of a personal story. Every space is
               designed to feel collected over time rather than assembled for a
               trend.
-            </p>
-            <p className="mt-4 font-secondary text-sm leading-7 text-[#6a5648] sm:text-base">
+            </Paragraph>
+
+            <Paragraph>
               The result is a retreat that balances elegance with warmth:
               generous views, tactile materials, and a sense of calm that lets
               guests settle in immediately. It is hospitality shaped by memory,
               place, and care.
-            </p>
+            </Paragraph>
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 pb-18 sm:px-8 lg:px-12">
-        <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-center">
-          <div className="order-2 max-w-2xl lg:order-1">
-            <div className="mb-4 h-px w-16 bg-[#b99863]" />
-            <p className="font-secondary text-xs uppercase tracking-[0.4em] text-[#9e7a49]">
-              Heritage & Hospitality
-            </p>
-            <h2 className="mt-3 font-primary text-4xl leading-tight text-[#8b1a1a] sm:text-5xl">
-              A Legacy of Culture and Hospitality
-            </h2>
-            <p className="mt-5 font-secondary text-sm leading-7 text-[#6a5648] sm:text-base">
+      {/* HERITAGE SECTION */}
+      <section className="px-6 pb-24 md:px-10">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center lg:gap-8">
+
+          {/* Content */}
+          <div className="order-2 max-w-2xl lg:order-1 lg:pr-20">
+            <SectionHeading
+              label="Who We Are"
+              title="A Legacy of Culture and Hospitality"
+            />
+
+            <Paragraph>
               The villa’s atmosphere is intentionally layered. Natural textures,
               open-air living, and quiet moments of ritual are all part of the
               experience. Guests are invited to slow down, notice the setting,
               and connect with a more grounded version of luxury.
-            </p>
-            <p className="mt-4 font-secondary text-sm leading-7 text-[#6a5648] sm:text-base">
+            </Paragraph>
+
+            <Paragraph>
               From sunrise views over the landscape to evenings shaped by warm
               light and conversation, every detail is meant to feel gracious,
               personal, and enduring.
-            </p>
+            </Paragraph>
           </div>
 
+          {/* Gallery */}
           <div className="order-1 lg:order-2">
-            <div className="grid grid-cols-2 gap-4 sm:gap-5">
+            <div className="grid grid-cols-2 gap-5">
               {galleryImages.map((image, index) => (
                 <div
                   key={`${image.alt}-${index}`}
-                  className={`${image.className} overflow-hidden rounded-[14px] shadow-[0_18px_40px_rgba(61,38,20,0.14)]`}
+                  className="overflow-hidden rounded-[16px] shadow-[0_18px_40px_rgba(61,38,20,0.14)] min-h-[240px] sm:min-h-[300px]"
                 >
                   <Image
                     src={image.src}
@@ -174,47 +193,63 @@ export default function About() {
         </div>
       </section>
 
-      <section className="border-t border-[#e9dcc8] bg-[#fffdf9]">
-        <div className="mx-auto max-w-5xl px-6 py-18 sm:px-8 lg:px-12">
-          <div className="text-center">
-            <div className="mx-auto mb-4 h-px w-16 bg-[#b99863]" />
-            <p className="font-secondary text-xs uppercase tracking-[0.4em] text-[#9e7a49]">
-              Helpful Information
-            </p>
-            <h2 className="mt-3 font-primary text-4xl text-[#8b1a1a] sm:text-5xl">
+      {/* FAQ SECTION */}
+      <section className="bg-[#fffdf9] px-6 pb-24 md:px-10">
+        <div className="mx-auto max-w-7xl">
+
+          {/* Heading */}
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="mb-4 font-primary text-5xl font-black leading-[1] text-primary md:text-6xl">
               Frequently Asked Questions
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl font-secondary text-sm leading-7 text-[#7a6758] sm:text-base">
+
+            <p className="font-secondary leading-relaxed text-gray-600 sm:text-base">
               A few common questions about the villa, the experience, and what
               to expect during your stay.
             </p>
           </div>
 
-          <div className="mt-10 space-y-4">
-            {faqItems.map((item) => (
+          {/* FAQ Container */}
+          <div className="mx-auto mt-14 max-w-6xl rounded-[22px] border border-[#ddd6cb] bg-[#fdfcf9] px-8 py-6 shadow-[0_8px_30px_rgba(61,38,20,0.06)]">
+
+            {faqItems.map((item, index) => (
               <details
                 key={item.question}
-                className="group rounded-[22px] border border-[#eadfce] bg-white px-6 py-5 shadow-[0_10px_25px_rgba(67,50,39,0.05)]"
+                open={index === 0}
+                className="group border-b border-[#cfc7bc] last:border-b-0"
               >
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-6 font-secondary text-sm font-bold text-[#433227] sm:text-base">
-                  <span>{item.question}</span>
-                  <span className="font-primary text-2xl leading-none text-[#8b1a1a] transition-transform duration-300 group-open:rotate-45">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6">
+
+                  <span className="font-primary text-[22px] text-[#433227]">
+                    {item.question}
+                  </span>
+
+                  <span className="font-primary text-3xl leading-none text-[#b9924c] transition-transform duration-300 group-open:rotate-45">
                     +
                   </span>
                 </summary>
-                <p className="pt-4 font-secondary text-sm leading-7 text-[#6d5a4d] sm:text-base">
-                  {item.answer}
-                </p>
+
+                <div className="overflow-hidden">
+                  <p className="max-w-5xl pb-8 pr-10 font-secondary text-[15px] leading-8 text-[#6f655b]">
+                    {item.answer}
+                  </p>
+                </div>
               </details>
             ))}
           </div>
 
-          <div className="mt-10 text-center">
+          {/* CTA */}
+          <div className="mt-16 text-center">
+
+            <p className="mb-6 font-secondary text-md text-gray-500">
+              Still have questions? We're here to help.
+            </p>
+
             <a
-              href="/booking"
-              className="inline-flex items-center justify-center rounded-full bg-[#8b1a1a] px-6 py-3 font-secondary text-xs font-bold uppercase tracking-[0.28em] text-white transition hover:bg-[#6f1414]"
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-[14px] bg-[#991B1B] px-6 py-4 font-secondary text-md text-white transition hover:bg-[#7f1717]"
             >
-              Book Your Stay
+              Contact Our Concierge
             </a>
           </div>
         </div>
