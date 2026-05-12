@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const faqItems = [
   {
@@ -24,8 +27,7 @@ const faqItems = [
       "The villa is welcoming year-round. The ideal time depends on whether you prefer sunnier days for outdoor lounging or a greener seasonal atmosphere with softer, misty landscapes.",
   },
   {
-    question:
-      "Can the team help with transport or itinerary planning?",
+    question: "Can the team help with transport or itinerary planning?",
     answer:
       "Yes. Guests can receive support with transfers, day planning, and nearby recommendations so the stay feels seamless from arrival to departure.",
   },
@@ -100,13 +102,65 @@ export default function About() {
 
       {/* HERO SECTION */}
       <section className="relative min-h-screen overflow-hidden">
-        <Image
-          src="/aboutHome.png"
-          alt="Premo Heritage Villa overlooking a lush tropical landscape"
-          fill
-          priority
-          className="object-cover"
-        />
+
+        <motion.div
+          initial={{ scale: 1.08 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.8, ease: "easeOut" }}
+          className="absolute inset-0"
+        >
+          <Image
+            src="/aboutHome.png"
+            alt="Premo Heritage Villa overlooking a lush tropical landscape"
+            fill
+            priority
+            className="object-cover"
+          />
+        </motion.div>
+
+        <div className="absolute inset-0 bg-black/45" />
+
+        <div className="relative z-10 flex min-h-screen items-center justify-center px-6 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="max-w-3xl"
+          >
+            <h1 className="font-primary text-5xl font-black leading-tight text-white md:text-6xl">
+              We're Here to Help
+            </h1>
+
+            <p className="mx-auto mt-6 max-w-2xl font-secondary text-sm leading-7 text-gray-200 md:text-base">
+              Have questions about your stay? Our dedicated team is ready to assist
+              you with reservations, special requests, and any inquiries about Premo
+              Heritage Villa.
+            </p>
+          </motion.div>
+        </div>
+
+        <div className="absolute bottom-10 left-1/2 z-20 -translate-x-1/2 animate-bounce">
+          <div className="flex flex-col items-center">
+            <span className="mb-3 font-secondary text-xs uppercase tracking-[0.3em] text-white/80">
+              Scroll Down
+            </span>
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-8 w-8 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={1.5}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </div>
+        </div>
       </section>
 
       {/* FOUNDER STORY SECTION */}
@@ -130,16 +184,13 @@ export default function About() {
             <Paragraph>
               Premo Heritage Villa was conceived as more than a place to stay.
               It was imagined as a home where architecture, atmosphere, and
-              service would carry the depth of a personal story. Every space is
-              designed to feel collected over time rather than assembled for a
-              trend.
+              service would carry the depth of a personal story.
             </Paragraph>
 
             <Paragraph>
               The result is a retreat that balances elegance with warmth:
               generous views, tactile materials, and a sense of calm that lets
-              guests settle in immediately. It is hospitality shaped by memory,
-              place, and care.
+              guests settle in immediately.
             </Paragraph>
           </div>
         </div>
@@ -149,7 +200,6 @@ export default function About() {
       <section className="px-6 pb-24 md:px-10">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center lg:gap-8">
 
-          {/* Content */}
           <div className="order-2 max-w-2xl lg:order-1 lg:pr-20">
             <SectionHeading
               label="Who We Are"
@@ -159,18 +209,15 @@ export default function About() {
             <Paragraph>
               The villa’s atmosphere is intentionally layered. Natural textures,
               open-air living, and quiet moments of ritual are all part of the
-              experience. Guests are invited to slow down, notice the setting,
-              and connect with a more grounded version of luxury.
+              experience.
             </Paragraph>
 
             <Paragraph>
               From sunrise views over the landscape to evenings shaped by warm
-              light and conversation, every detail is meant to feel gracious,
-              personal, and enduring.
+              light and conversation, every detail is meant to feel gracious.
             </Paragraph>
           </div>
 
-          {/* Gallery */}
           <div className="order-1 lg:order-2">
             <div className="grid grid-cols-2 gap-5">
               {galleryImages.map((image, index) => (
@@ -197,21 +244,17 @@ export default function About() {
       <section className="bg-[#fffdf9] px-6 pb-24 md:px-10">
         <div className="mx-auto max-w-7xl">
 
-          {/* Heading */}
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="mb-4 font-primary text-5xl font-black leading-[1] text-primary md:text-6xl">
               Frequently Asked Questions
             </h2>
 
             <p className="font-secondary leading-relaxed text-gray-600 sm:text-base">
-              A few common questions about the villa, the experience, and what
-              to expect during your stay.
+              A few common questions about the villa and experience.
             </p>
           </div>
 
-          {/* FAQ Container */}
           <div className="mx-auto mt-14 max-w-6xl rounded-[22px] border border-[#ddd6cb] bg-[#fdfcf9] px-8 py-6 shadow-[0_8px_30px_rgba(61,38,20,0.06)]">
-
             {faqItems.map((item, index) => (
               <details
                 key={item.question}
@@ -224,23 +267,23 @@ export default function About() {
                     {item.question}
                   </span>
 
-                  <span className="font-primary text-3xl leading-none text-[#b9924c] transition-transform duration-300 group-open:rotate-45">
+                  <span className="font-primary text-3xl leading-none text-[#b9924c] transition-transform duration-500 ease-out group-open:rotate-45">
                     +
                   </span>
                 </summary>
 
-                <div className="overflow-hidden">
-                  <p className="max-w-5xl pb-8 pr-10 font-secondary text-[15px] leading-8 text-[#6f655b]">
-                    {item.answer}
-                  </p>
+                <div className="grid grid-rows-[0fr] overflow-hidden transition-all duration-500 ease-in-out group-open:grid-rows-[1fr]">
+                  <div className="overflow-hidden">
+                    <p className="max-w-5xl pb-8 pr-10 font-secondary text-[15px] leading-8 text-[#6f655b]">
+                      {item.answer}
+                    </p>
+                  </div>
                 </div>
               </details>
             ))}
           </div>
 
-          {/* CTA */}
           <div className="mt-16 text-center">
-
             <p className="mb-6 font-secondary text-md text-gray-500">
               Still have questions? We're here to help.
             </p>
