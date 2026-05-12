@@ -1,5 +1,6 @@
 import HeritageSection from "./components/home/heritageSection";
 import GuestStoriesSection from "./components/home/GuestStoriesSection";
+import AncientSection from "./components/home/AncientSection";
 
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
 
       <HeritageSection />
       <GuestStoriesSection />
+      <AncientSection />
 
     </main>
   );

@@ -100,6 +100,7 @@ export default function About() {
 
       {/* HERO SECTION */}
       <section className="relative min-h-screen overflow-hidden">
+
         <Image
           src="/aboutHome.png"
           alt="Premo Heritage Villa overlooking a lush tropical landscape"
@@ -107,6 +108,42 @@ export default function About() {
           priority
           className="object-cover"
         />
+
+        <div className="absolute inset-0 bg-black/45" />
+        <div className="relative z-10 flex min-h-screen items-center justify-center px-6 text-center">
+          <div className="max-w-3xl">
+            <h1 className="font-primary text-5xl font-black leading-tight text-white md:text-6xl">
+              We're Here to Help
+            </h1>
+            <p className="mx-auto mt-6 max-w-2xl font-secondary text-sm leading-7 text-gray-200 md:text-base">
+              Have questions about your stay? Our dedicated team is ready to assist
+              you with reservations, special requests, and any inquiries about Premo
+              Heritage Villa.
+            </p>
+          </div>
+        </div>
+
+        <div className="absolute bottom-10 left-1/2 z-20 -translate-x-1/2 animate-bounce">
+          <div className="flex flex-col items-center">
+            <span className="mb-3 font-secondary text-xs uppercase tracking-[0.3em] text-white/80">
+              Scroll Down
+            </span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-8 w-8 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={1.5}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </div>
+        </div>
       </section>
 
       {/* FOUNDER STORY SECTION */}

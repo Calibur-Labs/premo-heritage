@@ -15,8 +15,8 @@ export default function HeritageSection() {
             </p>
 
             <h2 className="text-5xl md:text-6xl font-black font-primary text-primary leading-[1] mb-6">
-  A Villa Born from Tradition
-</h2>
+              A Villa Born from Tradition
+            </h2>
 
             <p className="text-gray-600 mb-4 leading-relaxed max-w-xl">
               Nestled in the heart of Sri Lanka, Premo Heritage Villa stands as a testament to centuries-old traditions. Our villa embodies the authentic spirit of Sri Lankan culture, where every meal is prepared using ancestral methods — clay pots over wood fire, hand-ground spices, and fresh herbs from our garden.
@@ -49,6 +49,7 @@ export default function HeritageSection() {
           </span>
         </div>
       </section>
+      
 
     </>
   );
