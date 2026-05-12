@@ -49,7 +49,6 @@ export default function HeritageSection() {
           </span>
         </div>
       </section>
-      
 
     </>
   );
