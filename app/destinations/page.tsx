@@ -246,10 +246,10 @@ export default function Destinations() {
   return (
     <main
       className="bg-white"
-      style={{
-        opacity: isReady ? 1 : 0,
-        transition: "opacity 0.4s ease",
-      }}
+      // style={{
+      //   opacity: isReady ? 1 : 0,
+      //   transition: "opacity 0.4s ease",
+      // }}
     >
       {/* HERO SECTION */}
       <section className="relative min-h-screen overflow-hidden">

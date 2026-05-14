@@ -27,74 +27,68 @@ const destinations: Destination[] = [
   {
     category: "BEACH",
     title: "Mirissa Beach",
-    location: "Southern Province",
-    image: "/mirissa.png",
+    location: "Mathara",
+    image: "/mobile/mirissa.jpeg",
   },
   {
     category: "BEACH",
     title: "Unawatuna Beach",
-    location: "Galle District",
-    image: "/unawatuna.png",
+    location: "Galle",
+    image: "/mobile/unawatuna.jpeg",
   },
   {
     category: "BEACH",
     title: "Thalpe Beach",
-    location: "Galle District",
-    image: "/thalpe.png",
+    location: "Galle",
+    image: "/mobile/thalpe.jpeg",
   },
   {
     category: "HIDDEN BEACH",
     title: "Jungle Beach",
     location: "Unawatuna",
-    image: "/junglebeach.png",
+    image: "/mobile/junglebeach.jpeg",
   },
   {
     category: "CULTURAL",
     title: "Galle Fort",
-    location: "Galle District",
-    image: "/gallefort.png",
+    location: "Galle",
+    image: "/mobile/fort.jpeg",
   },
   {
     category: "TEMPLE",
     title: "Japanese Peace Pagoda",
     location: "Unawatuna",
-    image: "/pagoda.png",
+    image: "/mobile/pagoda.jpeg",
   },
   {
     category: "NATURE",
     title: "Sinharaja Forest Reserve",
     location: "Sabaragamuwa",
-    image: "/sinharaja.png",
+    image: "/mobile/sinharaja.jpeg",
   },
   {
     category: "RAINFOREST",
     title: "Kanneliya Forest Reserve",
-    location: "Galle District",
-    image: "/kanneliya.png",
-  },
-  {
-    category: "SCENIC",
-    title: "Rumassala",
-    location: "Galle District",
-    image: "/rumassala.png",
+    location: "Galle",
+    image: "/mobile/kanneliya.jpeg",
   },
   {
     category: "RIVER SAFARI",
     title: "Madu Ganga",
     location: "Balapitiya",
-    image: "/maduganga.png",
+    image: "/mobile/maduganga.jpeg",
   },
   {
     category: "WILDLIFE",
     title: "Sea Turtle Hatchery",
     location: "Habaraduwa",
-    image: "/turtlehatchery.png",
+    image: "/mobile/turtle.jpeg",
   },
   {
     category: "SAFARI",
     title: "Yala National Park",
-    location: "Southern Province",
-    image: "/yala.png",
+    location: "Katharagama",
+    image: "/mobile/yala.jpeg",
   },
 ];
 
@@ -173,16 +167,16 @@ export default function BestDestinationsSection() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
         viewport={{ once: true }}
-        className="mb-16 text-center"
+        className="text-center"
       >
         <h2
           className="font-primary text-5xl font-black text-primary md:text-6xl" >
           Nearby Destinations
         </h2>
 
-<p className="mx-auto mt-3 max-w-2xl font-primary text-xl font-medium leading-8 text-gray-800">
-  Explore breathtaking beaches, cultural landmarks, rainforests, and unforgettable experiences located near Premo Heritage Villa.
-</p>
+        <p className="mx-auto mt-3 max-w-2xl font-primary text-xl font-medium leading-8 text-gray-800">
+          Explore breathtaking beaches, cultural landmarks, rainforests, and unforgettable experiences located near Premo Heritage Villa.
+        </p>
       </motion.div>
 
       {/* Stage */}
@@ -329,7 +323,7 @@ export default function BestDestinationsSection() {
         /* ── Stage ── */
         .best-dest-stage {
           position: relative;
-          padding: 30px 0 60px;
+          padding: 10px 0 30px;
         }
 
         .best-dest-track {
