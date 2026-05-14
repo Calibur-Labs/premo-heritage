@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import HeritageSection from "./components/home/heritageSection";
 import GuestStoriesSection from "./components/home/GuestStoriesSection";
 import AncientSection from "./components/home/AncientSection";
+import BestDestinationsSection from "./components/home/BestDestinationsSection";
 
 export default function Home() {
   return (
@@ -108,6 +109,7 @@ export default function Home() {
       <HeritageSection />
       <GuestStoriesSection />
       <AncientSection />
+      <BestDestinationsSection />
 
     </main>
   );

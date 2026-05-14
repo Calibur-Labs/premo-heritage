@@ -75,7 +75,7 @@ function SectionHeading({
         </p>
       )}
 
-      <h2 className="mb-6 font-primary text-5xl font-black leading-[1] text-primary md:text-6xl">
+      <h2 className="mb-6 font-primary text-5xl font-black leading-\[1]\ text-primary md:text-6xl">
         {title}
       </h2>
 
@@ -167,11 +167,11 @@ export default function About() {
       <section className="px-6 py-24 md:px-10">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-4">
 
-          <div>
+          <div className="flex justify-center">
             <img
               src="/founder.png"
               alt="Premo Heritage portrait-inspired visual"
-              className="h-auto w-full object-cover lg:pr-16"
+              className="h-\[450px\] w-full max-w-\[400px\] object-cover rounded-xl md:h-[\550px\]"
             />
           </div>
 

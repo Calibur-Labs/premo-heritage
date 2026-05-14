@@ -148,7 +148,7 @@ export default function GuestStoriesSection() {
           Guest Stories
         </h2>
 
-        <p className="mx-auto mt-3 max-w-2xl font-primary text-lg leading-7 text-gray-600">
+        <p className="mx-auto mt-3 max-w-2xl font-primary text-xl font-medium leading-8 text-gray-800">
           Discover heartfelt experiences shared by guests who embraced the
           warmth, heritage, and timeless charm of Premo Heritage Villa.
         </p>
