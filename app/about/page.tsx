@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const faqItems = [
   {
@@ -171,7 +172,7 @@ export default function About() {
             <img
               src="/founder.png"
               alt="Premo Heritage portrait-inspired visual"
-              className="h-\[450px\] w-full max-w-\[400px\] object-cover rounded-xl md:h-[\550px\]"
+              className="h-[550px] w-full max-w-[500px] object-cover rounded-xl md:h-[650px]"
             />
           </div>
 
@@ -284,16 +285,22 @@ export default function About() {
           </div>
 
           <div className="mt-16 text-center">
-            <p className="mb-6 font-secondary text-md text-gray-500">
+            <p className="mb-4 font-primary text-[18px] font-bold text-gray-800">
               Still have questions? We're here to help.
             </p>
 
-            <a
-              href="/contact"
-              className="inline-flex items-center justify-center rounded-[14px] bg-[#991B1B] px-6 py-4 font-secondary text-md text-white transition hover:bg-[#7f1717]"
-            >
-              Contact Our Concierge
-            </a>
+              <Link href="/contact" className="flex justify-center">
+                  <button className="group relative flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-sm bg-[#8B1A1A] px-10 py-4 font-secondary text-xs font-semibold uppercase tracking-[0.2em] text-white transition-all duration-500 hover:bg-[#6f1515] sm:w-auto">
+                  
+                  {/* Shine Element */}
+                  <div className="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-1000 ease-in-out group-hover:translate-x-[150%]" />
+                  
+                  <span className="relative z-10 flex items-center gap-3">
+                    Contact Our Concierge
+                  </span>
+                </button>
+              </Link>
+            
           </div>
         </div>
       </section>

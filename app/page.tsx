@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { Calendar, Mail } from "lucide-react";
+import Link from "next/link";
 
 import HeritageSection from "./components/home/heritageSection";
 import GuestStoriesSection from "./components/home/GuestStoriesSection";
@@ -13,7 +15,7 @@ export default function Home() {
     <main className="min-h-screen">
 
       {/* HERO SECTION */}
-      <section className="relative min-h-screen overflow-hidden">
+      <section className="relative flex min-h-screen flex-col overflow-hidden">
 
         {/* Background Animation */}
         <motion.div
@@ -31,11 +33,11 @@ export default function Home() {
           />
         </motion.div>
 
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/50" />
+        {/* Increased Overlay for better contrast */}
+        <div className="absolute inset-0 bg-black/65" />
 
         {/* Hero Content */}
-        <div className="relative z-10 flex min-h-screen w-full items-center justify-center px-6 pt-24 text-center">
+        <div className="relative z-10 flex flex-1 items-center justify-center px-2 pt-28 text-center">
 
           <motion.div
             initial={{ opacity: 0, y: 60 }}
@@ -58,49 +60,50 @@ export default function Home() {
             </p>
 
             {/* Premium Buttons */}
-            <div className="mt-12 flex flex-col items-center justify-center gap-5 sm:flex-row">
-
-              {/* Explore Button */}
-              <button className="group rounded-[10px] bg-[#991B1B] px-10 py-4 font-secondary text-sm uppercase tracking-[0.18em] text-white transition duration-500 hover:bg-[#7d1515]">
-
-                <span className="flex items-center gap-3">
-                  Explore Villa
-
-                  <span className="transition duration-300 group-hover:translate-x-1">
-                    →
+            <div className="mt-12 flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-8">
+              
+              {/* Primary CTA (Shine + Darker Hover + Pointer) */}
+              <Link href="/booking">
+                <button className="group relative flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-sm bg-[#8B1A1A] px-10 py-4 font-secondary text-xs font-semibold uppercase tracking-[0.2em] text-white transition-all duration-500 hover:bg-[#6f1515] sm:w-auto">
+                  
+                  {/* Shine Element */}
+                  <div className="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-1000 ease-in-out group-hover:translate-x-[150%]" />
+                  
+                  <span className="relative z-10 flex items-center gap-3">
+                    Book Your Stay
+                    <Calendar size={18} className="transition-transform duration-300" />
                   </span>
-                </span>
+                </button>
+              </Link>
 
-              </button>
-
-              {/* Booking Button */}
-              <button className="group rounded-[10px] border border-white/60 bg-white/10 px-10 py-4 font-secondary text-sm uppercase tracking-[0.18em] text-white backdrop-blur-md transition duration-500 hover:bg-white hover:text-black">
-
-                <span className="flex items-center gap-3">
-                  Book Your Stay
-
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4 transition duration-300 group-hover:rotate-12"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M8 7h8m0 0v8m0-8L6 17"
-                    />
-                  </svg>
-                </span>
-
-              </button>
+              {/* Secondary CTA */}
+              <Link href="/contact">
+                <button className="group relative flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-sm border border-white/30 bg-white/5 px-10 py-4 font-secondary text-xs font-semibold uppercase tracking-[0.2em] text-white backdrop-blur-md transition-all duration-500 hover:bg-black/60 sm:w-auto">
+                  
+                  {/* Shine Element */}
+                  <div className="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-1000 ease-in-out group-hover:translate-x-[150%]" />
+                  
+                  <span className="relative z-10 flex items-center gap-3">
+                    Contact Us
+                    <Mail size={18} className="transition-transform duration-300" />
+                  </span>
+                </button>
+              </Link>
 
             </div>
-
           </motion.div>
+        </div>
 
+        {/* Scroll Down Animation */}
+        <div className="relative z-10 flex w-full flex-col items-center justify-center pb-4">
+          <motion.div 
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="flex flex-col items-center gap-3"
+          >
+            <span className="font-secondary text-[10px] uppercase tracking-[0.3em] text-white/60">Scroll Down</span>
+            <div className="h-12 w-[1px] bg-gradient-to-b from-white/60 to-transparent" />
+          </motion.div>
         </div>
 
       </section>

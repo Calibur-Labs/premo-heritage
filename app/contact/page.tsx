@@ -1,103 +1,101 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import type { FormEvent } from "react";
+import type { FormEvent, SVGProps } from "react";
+import {
+  MapPin,
+  Phone,
+  Mail,
+  ChevronDown,
+  Clock,
+  ArrowRight,
+  Plane,
+  Car,
+  TrainFront,
+  Navigation,
+} from "lucide-react";
 
 const contactDetails = [
   {
     title: "Our Location",
     lines: ["Plot 12, Temple Road, Talpe,", "Galle, Sri Lanka"],
-    icon: (
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M12 21s7-4.35 7-11a7 7 0 10-14 0c0 6.65 7 11 7 11z"
-      />
-    ),
+    Icon: MapPin,
   },
   {
     title: "Phone Number",
     lines: ["+94 76 11 11 111"],
-    icon: (
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M3 5.5C3 4.12 4.12 3 5.5 3h2.1c.48 0 .9.34 1 .81l.7 3.15a1.2 1.2 0 01-.34 1.11L7.7 9.33a13.1 13.1 0 006.97 6.97l1.26-1.26a1.2 1.2 0 011.11-.34l3.15.7c.47.1.81.52.81 1V18.5c0 1.38-1.12 2.5-2.5 2.5A15.5 15.5 0 013 5.5z"
-      />
-    ),
+    Icon: Phone,
   },
   {
     title: "Email Address",
     lines: ["premo@gmail.com"],
-    icon: (
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M4 6h16v12H4V6zm0 0l8 7 8-7"
-      />
-    ),
+    Icon: Mail,
   },
 ];
 
+// Brand icons — Lucide v1 removed these because they're trademarks,
+// so we use clean custom SVGs (official brand glyphs).
+const FacebookIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    aria-hidden="true"
+    {...props}
+  >
+    <path d="M22 12a10 10 0 10-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.77l-.44 2.89h-2.33v6.99A10 10 0 0022 12z" />
+  </svg>
+);
+
+const InstagramIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={1.8}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    {...props}
+  >
+    <rect x="3" y="3" width="18" height="18" rx="5" />
+    <circle cx="12" cy="12" r="4" />
+    <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none" />
+  </svg>
+);
+
+const WhatsappIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    aria-hidden="true"
+    {...props}
+  >
+    <path d="M17.5 14.4c-.3-.15-1.77-.87-2.05-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.18.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48a8.97 8.97 0 01-1.66-2.07c-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.51-.18-.01-.37-.01-.57-.01-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.47 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.3 1.27.49 1.7.63.71.23 1.36.2 1.87.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35zM12.04 21.5h-.01a9.42 9.42 0 01-4.8-1.31l-.34-.2-3.57.94.95-3.48-.22-.36a9.43 9.43 0 0114.66-11.6 9.4 9.4 0 012.78 6.69c0 5.2-4.23 9.42-9.45 9.42zm8.02-17.44A11.32 11.32 0 0012.04 1C5.82 1 .77 6.05.77 12.27c0 1.99.52 3.93 1.51 5.64L.67 24l6.27-1.65a11.27 11.27 0 005.1 1.3h.01c6.22 0 11.27-5.05 11.27-11.26 0-3.01-1.17-5.84-3.3-7.96z" />
+  </svg>
+);
+
+const TripadvisorIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    aria-hidden="true"
+    {...props}
+  >
+    <path d="M12 8.5c2.4 0 4.7.5 6.7 1.5l2.3-2.5h-4.5c-1.4-.9-3-1.5-4.5-1.5s-3.1.6-4.5 1.5H3l2.3 2.5c2-1 4.3-1.5 6.7-1.5zM7.5 11a3 3 0 100 6 3 3 0 000-6zm9 0a3 3 0 100 6 3 3 0 000-6zm-9 1.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm9 0a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM12 13.5l-1.4 2h2.8L12 13.5z" />
+  </svg>
+);
+
 const socialLinks = [
-  {
-    label: "Facebook",
-    href: "#",
-    icon: (
-      <path
-        fill="currentColor"
-        d="M13.5 20v-7h2.35l.35-2.73h-2.7V8.53c0-.79.22-1.33 1.35-1.33h1.44V4.76A19.3 19.3 0 0014.2 4c-2.08 0-3.5 1.27-3.5 3.6v2.01H8.35V13h2.35v7h2.8z"
-      />
-    ),
-  },
-  {
-    label: "Tripadvisor",
-    href: "#",
-    icon: (
-      <path
-        fill="currentColor"
-        d="M12 7.5c2.9 0 5.41.75 6.68 1.88l1.32-1.45h-3.08V6h-9.84v1.93H4l1.32 1.45C6.59 8.25 9.1 7.5 12 7.5zm-4.1 3.1a2.55 2.55 0 102.55 2.55A2.55 2.55 0 007.9 10.6zm8.2 0a2.55 2.55 0 102.55 2.55 2.55 2.55 0 00-2.55-2.55zM7.9 14.25a1.1 1.1 0 111.1-1.1 1.1 1.1 0 01-1.1 1.1zm8.2 0a1.1 1.1 0 111.1-1.1 1.1 1.1 0 01-1.1 1.1zM12 15.1l-1.48 2.24h2.96L12 15.1z"
-      />
-    ),
-  },
-  {
-    label: "Instagram",
-    href: "#",
-    icon: (
-      <>
-        <rect
-          x="5"
-          y="5"
-          width="14"
-          height="14"
-          rx="4"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          fill="none"
-        />
-        <circle
-          cx="12"
-          cy="12"
-          r="3"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          fill="none"
-        />
-        <circle cx="16.4" cy="7.6" r="1" fill="currentColor" />
-      </>
-    ),
-  },
-  {
-    label: "WhatsApp",
-    href: "#",
-    icon: (
-      <path
-        fill="currentColor"
-        d="M12.04 4a7.8 7.8 0 00-6.69 11.82L4.4 20l4.27-.91A7.8 7.8 0 1012.04 4zm0 1.47a6.33 6.33 0 015.4 9.64 6.32 6.32 0 01-8.08 2.5l-.25-.13-2.57.55.56-2.51-.16-.26a6.33 6.33 0 015.1-9.79zm-2.8 3.2c-.13 0-.34.05-.52.25-.18.2-.68.67-.68 1.64 0 .96.7 1.9.8 2.03.1.13 1.36 2.18 3.39 2.97 1.68.66 2.03.53 2.4.5.36-.04 1.17-.48 1.34-.94.17-.46.17-.86.12-.94-.05-.08-.18-.13-.38-.23-.2-.1-1.17-.58-1.35-.65-.18-.07-.31-.1-.44.1-.13.2-.51.65-.63.78-.12.13-.23.15-.43.05-.2-.1-.84-.31-1.6-.99-.59-.53-.99-1.18-1.1-1.38-.12-.2-.01-.31.09-.41.09-.09.2-.23.3-.35.1-.12.13-.2.2-.33.07-.13.03-.25-.02-.35-.05-.1-.44-1.06-.6-1.45-.16-.37-.32-.32-.44-.33h-.39z"
-      />
-    ),
-  },
+  { label: "Facebook", href: "#", Icon: FacebookIcon },
+  { label: "Tripadvisor", href: "#", Icon: TripadvisorIcon },
+  { label: "Instagram", href: "#", Icon: InstagramIcon },
+  { label: "WhatsApp", href: "#", Icon: WhatsappIcon },
 ];
 
 const villaAddressLines = [
@@ -121,57 +119,25 @@ const travelOptions = [
     title: "Private Airport Transfer",
     description:
       "Experience a seamless transition from Bandaranaike International Airport (BIA) with our luxury chauffeur service. Air-conditioned comfort and direct pickup.",
-    linkText: "Reserve Now",
-    href: "/booking",
-    icon: (
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M4 15h1.5m13 0H20M7 17.5h.01M17 17.5h.01M6 15l1.4-4.2A2 2 0 019.3 9.4h5.4a2 2 0 011.9 1.4L18 15m-12 0v3h2m10-3v3h-2M8 12h8"
-      />
-    ),
+    Icon: Plane,
   },
   {
     title: "Taxi & Ride Services",
     description:
       "Flexible and convenient travel via reputable local taxi providers or ride-hailing apps. A direct route to the Southern Expressway ensures a smooth trip.",
-    linkText: "Local Info",
-    href: villaDirectionsUrl,
-    icon: (
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M7 16h10M6 13h12M8 18.5h.01M16 18.5h.01M7 13l1.2-4A2 2 0 0110.1 7.6h3.8A2 2 0 0115.8 9L17 13m-11 0v4h2m10-4v4h-2M10 5.5h4"
-      />
-    ),
+    Icon: Car,
   },
   {
     title: "Scenic Coastal Train",
     description:
       "For the romantic traveler, the ocean-view train from Colombo Fort to Galle Station offers breathtaking vistas of the Indian Ocean coastline.",
-    linkText: "View Schedule",
-    href: "#",
-    icon: (
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M8 17l-1.5 2M16 17l1.5 2M7 5h10a2 2 0 012 2v7a3 3 0 01-3 3H8a3 3 0 01-3-3V7a2 2 0 012-2zm2 4h6M9 13h.01M15 13h.01"
-      />
-    ),
+    Icon: TrainFront,
   },
   {
     title: "Self-Drive",
     description:
       "Enjoy the freedom of the open road. The villa is easily accessible via the E01 Expressway, with secure on-site parking available for all guests.",
-    linkText: "Driving Routes",
-    href: villaDirectionsUrl,
-    icon: (
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M5 16h14M7 18.5h.01M17 18.5h.01M6.5 16l1.1-4.1A2 2 0 019.5 10.4h5A2 2 0 0116.4 12l1.1 4M8 8h8m-10 8v3h2m10-3v3h-2"
-      />
-    ),
+    Icon: Navigation,
   },
 ];
 
@@ -197,7 +163,7 @@ export default function Contact() {
           className="absolute inset-0"
         >
           <Image
-            src="/homebg.png"
+            src="/contactbg.jpeg"
             alt="Premo Heritage Villa luxury beachfront view"
             fill
             priority
@@ -206,74 +172,92 @@ export default function Contact() {
         </motion.div>
 
         {/* Overlay */}
-        <div className="absolute inset-0" />
+        <div className="absolute inset-0 bg-black/45" />
 
         {/* Hero Content */}
-        
+        <div className="relative z-10 flex min-h-screen items-center justify-center px-6 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="max-w-4xl"
+          >
+            <h1 className="font-primary text-5xl font-black leading-tight text-white md:text-6xl">
+              We&apos;re Here to Help
+            </h1>
+
+            <p className="mx-auto mt-6 max-w-2xl font-secondary text-sm leading-7 text-gray-200 md:text-base">
+              Have questions about your stay? Our dedicated team is ready to
+              assist you with reservations, special requests, and any inquiries
+              about Premo Heritage Villa.
+            </p>
+          </motion.div>
+        </div>
+
+        {/* Scroll Down Indicator */}
+        <div className="absolute bottom-10 left-1/2 z-20 -translate-x-1/2 animate-bounce">
+          <div className="flex flex-col items-center">
+            <span className="mb-3 font-secondary text-[15px] uppercase tracking-[0.3em] text-white/80">
+              Scroll Down
+            </span>
+
+            <ChevronDown className="h-8 w-8 text-white" strokeWidth={1.5} />
+          </div>
+        </div>
       </section>
 
       {/* CONTACT FORM SECTION */}
-      <section className="bg-[#fbfaf7] px-6 py-20 md:px-10 lg:py-24">
-        <div className="mx-auto grid max-w-6xl overflow-hidden border border-[#eee4da] bg-white shadow-[0_12px_35px_rgba(61,38,20,0.05)] lg:grid-cols-[0.95fr_1.05fr]">
+      <section className="bg-[#fbfaf7] py-20 lg:py-24">
+        <div className="mx-auto grid max-w-7xl overflow-hidden border border-[#eee4da] bg-white shadow-[0_12px_35px_rgba(61,38,20,0.05)] lg:grid-cols-[0.95fr_1.05fr]">
           <div className="px-8 py-12 sm:px-12 lg:px-16">
             <h2 className="font-primary text-3xl font-black text-primary md:text-4xl">
               Contact Details
             </h2>
 
             <div className="mt-10 space-y-8">
-              {contactDetails.map((detail) => (
-                <div key={detail.title} className="flex gap-5">
-                  <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[8px] bg-[#f4f1ec] text-primary">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={1.7}
-                    >
-                      {detail.icon}
-                    </svg>
-                  </div>
+              {contactDetails.map((detail) => {
+                const { Icon } = detail;
+                return (
+                  <div key={detail.title} className="flex gap-5">
+                    <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[8px] bg-[#f4f1ec] text-primary">
+                      <Icon className="h-6 w-6" strokeWidth={1.7} />
+                    </div>
 
-                  <div className="pt-1">
-                    <h3 className="font-primary text-xl font-bold leading-none text-[#2f2520]">
-                      {detail.title}
-                    </h3>
+                    <div className="pt-1">
+                      <h3 className="font-primary text-[24px] font-bold leading-none text-[#2f2520]">
+                        {detail.title}
+                      </h3>
 
-                    <div className="mt-2 font-secondary text-sm leading-5 text-[#7d746c]">
-                      {detail.lines.map((line) => (
-                        <p key={line}>{line}</p>
-                      ))}
+                      <div className="mt-2 font-secondary text-[16px] font-medium leading-8 text-gray-800">
+                        {detail.lines.map((line) => (
+                          <p key={line}>{line}</p>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             <div className="mt-14">
-              <p className="font-secondary text-xs font-bold uppercase tracking-[0.18em] text-[#5d5148]">
+              <p className="font-secondary text-[15px] font-bold uppercase tracking-[0.18em] text-[#5d5148]">
                 Follow the Journey
               </p>
 
               <div className="mt-4 flex gap-4">
-                {socialLinks.map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    aria-label={link.label}
-                    className="flex h-9 w-9 items-center justify-center rounded-[8px] border border-[#ead8d0] text-[#2f2520] transition duration-300 hover:border-[#8B1A1A] hover:bg-[#8B1A1A] hover:text-white"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-4 w-4"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
+                {socialLinks.map((link) => {
+                  const { Icon } = link;
+                  return (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      aria-label={link.label}
+                      className="flex h-10 w-10 items-center justify-center rounded-[8px] border border-[#ead8d0] text-[#2f2520] transition duration-300 hover:border-[#8B1A1A] hover:bg-[#8B1A1A] hover:text-white"
                     >
-                      {link.icon}
-                    </svg>
-                  </a>
-                ))}
+                      <Icon className="h-4 w-4" />
+                    </a>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -286,7 +270,7 @@ export default function Contact() {
             <form className="mt-9 space-y-7" onSubmit={handleSubmit}>
               <div className="grid gap-7 md:grid-cols-2">
                 <label className="block">
-                  <span className="font-primary text-xs font-bold uppercase tracking-[0.22em] text-[#7c6d63]">
+                  <span className="font-primary text-[15px] font-bold uppercase tracking-[0.22em] text-[#7c6d63]">
                     Full Name
                   </span>
                   <input
@@ -294,12 +278,12 @@ export default function Contact() {
                     name="fullName"
                     placeholder="Your Name"
                     autoComplete="name"
-                    className="mt-2 h-12 w-full border border-[#e7d1c8] bg-transparent px-4 font-secondary text-sm text-[#2f2520] outline-none transition placeholder:text-[#9c9188] focus:border-primary"
+                    className="mt-2 h-12 w-full border border-[#e7d1c8] bg-transparent px-4 font-secondary text-base font-medium text-gray-800 outline-none transition placeholder:text-[#9c9188] focus:border-primary"
                   />
                 </label>
 
                 <label className="block">
-                  <span className="font-primary text-xs font-bold uppercase tracking-[0.22em] text-[#7c6d63]">
+                  <span className="font-primary text-[15px] font-bold uppercase tracking-[0.22em] text-[#7c6d63]">
                     Email Address
                   </span>
                   <input
@@ -307,13 +291,13 @@ export default function Contact() {
                     name="email"
                     placeholder="email@example.com"
                     autoComplete="email"
-                    className="mt-2 h-12 w-full border border-[#e7d1c8] bg-transparent px-4 font-secondary text-sm text-[#2f2520] outline-none transition placeholder:text-[#9c9188] focus:border-primary"
+                    className="mt-2 h-12 w-full border border-[#e7d1c8] bg-transparent px-4 font-secondary text-base font-medium text-gray-800 outline-none transition placeholder:text-[#9c9188] focus:border-primary"
                   />
                 </label>
               </div>
 
               <label className="block">
-                <span className="font-primary text-xs font-bold uppercase tracking-[0.22em] text-[#7c6d63]">
+                <span className="font-primary text-[15px] font-bold uppercase tracking-[0.22em] text-[#7c6d63]">
                   Phone Number
                 </span>
                 <input
@@ -321,29 +305,32 @@ export default function Contact() {
                   name="phone"
                   placeholder="+94 XX XXX XXXX"
                   autoComplete="tel"
-                  className="mt-2 h-12 w-full border border-[#e7d1c8] bg-transparent px-4 font-secondary text-sm text-[#2f2520] outline-none transition placeholder:text-[#9c9188] focus:border-primary"
+                  className="mt-2 h-12 w-full border border-[#e7d1c8] bg-transparent px-4 font-secondary text-base font-medium text-gray-800 outline-none transition placeholder:text-[#9c9188] focus:border-primary"
                 />
               </label>
 
               <label className="block">
-                <span className="font-primary text-xs font-bold uppercase tracking-[0.22em] text-[#7c6d63]">
+                <span className="font-primary text-[15px] font-bold uppercase tracking-[0.22em] text-[#7c6d63]">
                   Message
                 </span>
                 <textarea
                   name="message"
                   placeholder="How can we assist you today?"
                   rows={5}
-                  className="mt-2 w-full resize-none border border-[#e7d1c8] bg-transparent px-4 py-3 font-secondary text-sm text-[#2f2520] outline-none transition placeholder:text-[#9c9188] focus:border-primary"
+                  className="mt-2 w-full resize-none border border-[#e7d1c8] bg-transparent px-4 py-3 font-secondary text-base font-medium text-gray-800 outline-none transition placeholder:text-[#9c9188] focus:border-primary"
                 />
               </label>
 
               <button
                 type="submit"
-                className="group inline-flex h-12 items-center justify-center rounded-[6px] bg-[#8b1717] px-10 font-secondary text-xs font-bold uppercase tracking-[0.25em] text-white transition duration-300 hover:bg-[#6f1111]"
+                className="group relative flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-sm bg-[#8B1A1A] px-10 py-4 font-secondary text-xs font-semibold uppercase tracking-[0.2em] text-white transition-all duration-500 hover:bg-[#6f1515] sm:w-auto"
               >
-                Send Inquiry
-                <span className="ml-3 transition duration-300 group-hover:translate-x-1">
-                  -&gt;
+                {/* Shine Element */}
+                <div className="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-1000 ease-in-out group-hover:translate-x-[150%]" />
+
+                <span className="relative z-10 flex items-center gap-3">
+                  Send Inquiry
+                  <ArrowRight className="h-4 w-4" />
                 </span>
               </button>
             </form>
@@ -352,32 +339,18 @@ export default function Contact() {
       </section>
 
       {/* VILLA LOCATION SECTION */}
-      <section className="bg-[#f1eee9] px-6 py-20 md:px-10 lg:py-24">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[0.62fr_1.38fr] lg:gap-20">
+      <section className="bg-[#f1eee9] py-20 lg:py-24">
+        <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[0.62fr_1.38fr] lg:gap-20">
           <div>
             <div className="mb-5 flex h-9 w-9 items-center justify-center text-primary">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-7 w-7"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={1.8}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 21s7-4.35 7-11a7 7 0 10-14 0c0 6.65 7 11 7 11z"
-                />
-                <circle cx="12" cy="10" r="2.5" />
-              </svg>
+              <MapPin className="h-7 w-7" strokeWidth={1.8} />
             </div>
 
             <h2 className="font-primary text-3xl font-black text-primary md:text-4xl">
               The Villa Location
             </h2>
 
-            <address className="mt-6 not-italic font-secondary text-sm leading-7 text-[#675d55]">
+            <address className="mt-6 not-italic font-secondary text-[18px] font-medium leading-8 text-gray-800">
               {villaAddressLines.map((line) => (
                 <p key={line}>{line}</p>
               ))}
@@ -387,9 +360,10 @@ export default function Contact() {
               href={villaDirectionsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-8 inline-flex border-b border-primary pb-1 font-secondary text-xs uppercase tracking-[0.08em] text-primary transition duration-300 hover:text-[#6f1111]"
+              className="mt-8 inline-flex items-center gap-2 border-b border-primary pb-1 font-secondary text-[15px] uppercase tracking-[0.08em] text-primary transition duration-300 hover:text-[#6f1111]"
             >
               Get Directions
+              <ArrowRight className="h-3.5 w-3.5" />
             </a>
           </div>
 
@@ -407,10 +381,10 @@ export default function Contact() {
       </section>
 
       {/* TRAVEL GUIDE SECTION */}
-      <section className="bg-white px-6 py-20 md:px-10 lg:py-24">
-        <div className="mx-auto max-w-6xl">
+      <section className="bg-white py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="font-secondary text-[10px] font-bold uppercase tracking-[0.32em] text-[#a87d2d]">
+            <p className="font-secondary text-sm uppercase tracking-[0.3em] text-[#C9A84C]">
               Travel Guide
             </p>
 
@@ -418,7 +392,7 @@ export default function Contact() {
               Getting to Premo Heritage Villa
             </h2>
 
-            <p className="mx-auto mt-4 max-w-2xl font-secondary text-sm leading-7 text-[#675d55]">
+            <p className="mx-auto mt-4 max-w-2xl font-primary text-xl font-medium leading-8 text-gray-800">
               Explore the most convenient ways to reach us and begin your
               journey with ease. Whether by rail, road, or private chauffeur,
               the path to heritage is seamless.
@@ -427,88 +401,57 @@ export default function Contact() {
             <div className="mx-auto mt-5 h-px w-24 bg-[#a87d2d]" />
           </div>
 
-          <div className="mt-10 grid gap-px overflow-hidden border border-[#ebe4dc] bg-[#ebe4dc] md:grid-cols-2 lg:grid-cols-4">
-            {travelOptions.map((option) => (
-              <article
-                key={option.title}
-                className="bg-[#f7f4ee] px-8 py-10 transition duration-300 hover:bg-white"
-              >
-                <div className="mb-8 text-primary">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2.2}
-                  >
-                    {option.icon}
-                  </svg>
-                </div>
-
-                <h3 className="font-primary text-xl font-bold leading-tight text-[#2f2520]">
-                  {option.title}
-                </h3>
-
-                <p className="mt-4 min-h-[132px] font-secondary text-sm leading-6 text-[#675d55]">
-                  {option.description}
-                </p>
-
-                <a
-                  href={option.href}
-                  target={option.href.startsWith("http") ? "_blank" : undefined}
-                  rel={
-                    option.href.startsWith("http")
-                      ? "noopener noreferrer"
-                      : undefined
-                  }
-                  className="group mt-7 inline-flex flex-col items-start font-secondary text-[11px] font-bold uppercase tracking-[0.16em] text-[#9b7426] transition duration-300 hover:text-primary"
+          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {travelOptions.map((option) => {
+              const { Icon } = option;
+              return (
+                <article
+                  key={option.title}
+                  className="rounded-[6px] border border-[#ebe4dc] bg-[#f7f4ee] px-8 py-10 transition duration-300 hover:bg-white hover:shadow-[0_12px_30px_rgba(61,38,20,0.08)]"
                 >
-                  <span className="inline-flex items-center">
-                    {option.linkText}
-                    <span className="ml-2 text-sm leading-none">-&gt;</span>
-                  </span>
-                  <span className="mt-1 h-px w-0 bg-current transition-all duration-300 group-hover:w-full" />
-                </a>
-              </article>
-            ))}
+                  <div className="mb-8 text-primary">
+                    <Icon className="h-12 w-12" strokeWidth={1.6} />
+                  </div>
+
+                  <h3 className="font-primary text-[24px] font-bold leading-tight text-[#2f2520]">
+                    {option.title}
+                  </h3>
+
+                  <p className="mt-4 font-primary text-lg font-medium leading-7 text-gray-800">
+                    {option.description}
+                  </p>
+                </article>
+              );
+            })}
           </div>
 
           <div className="mt-16 flex flex-col gap-6 bg-[#f7f4ee] px-8 py-8 sm:flex-row sm:items-center sm:justify-between md:px-10">
             <div className="flex items-center gap-5">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[8px] bg-[#f0d8cf] text-primary">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={1.7}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 8v4l2.5 2.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
+                <Clock className="h-5 w-5" strokeWidth={1.7} />
               </div>
 
               <div>
                 <p className="font-secondary text-[10px] font-bold uppercase tracking-[0.22em] text-[#a87d2d]">
                   Estimated Journey
                 </p>
-                <p className="mt-1 font-primary text-xl text-[#2f2520]">
+                <p className="mt-1 font-primary text-xl font-medium leading-8 text-gray-800">
                   Travel time from Colombo: approximately 2-2.5 hours.
                 </p>
               </div>
             </div>
 
-            <a
-              href="/booking"
-              className="inline-flex h-12 items-center justify-center rounded-[2px] bg-[#8b1717] px-8 font-secondary text-xs font-bold uppercase tracking-[0.22em] text-white transition duration-300 hover:bg-[#6f1111]"
-            >
-              Arrange Your Transfer
-            </a>
+            <Link href="/booking">
+              <button className="group relative flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-sm bg-[#8B1A1A] px-10 py-4 font-secondary text-xs font-semibold uppercase tracking-[0.2em] text-white transition-all duration-500 hover:bg-[#6f1515] sm:w-auto">
+                {/* Shine Element */}
+                <div className="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-1000 ease-in-out group-hover:translate-x-[150%]" />
+
+                <span className="relative z-10 flex items-center gap-3">
+                  Arrange Your Transfer
+                  <ArrowRight className="h-4 w-4" />
+                </span>
+              </button>
+            </Link>
           </div>
         </div>
       </section>
