@@ -4,17 +4,18 @@ export default function HeritageSection() {
       <section className="bg-[#f5f5f5] py-20 px-10 md:px-20">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           
-          <img
-            src="/lipa.png"
-            alt="Heritage cooking"
-          />
-          <div>
+            <img
+              src="/lipa.png"
+              alt="Heritage cooking"
+              className="w-[85%] mx-auto object-cover rounded-[10px]"
+            />
 
+          <div>
             <p className="font-secondary text-sm tracking-[0.3em] text-[#C9A84C] uppercase mb-4">
               Our Heritage
             </p>
 
-            <h2 className="text-5xl md:text-6xl font-black font-primary text-primary leading-tight mb-6">
+            <h2 className="text-5xl md:text-6xl font-black font-primary text-primary leading-\[1\] mb-6">
               A Villa Born from Tradition
             </h2>
 
@@ -26,7 +27,7 @@ export default function HeritageSection() {
               Each element of our villa tells a story, from the hand-carved wooden pillars to the traditional terracotta roof tiles. We invite you to experience a living heritage that honors the past while embracing the present.
             </p>
 
-            <div className="w-36 h-[2px] bg-[#b89b5e]"></div>
+            <div className="w-36 h-\[2px\] bg-[#b89b5e]"></div>
 
           </div>
         </div>
@@ -35,16 +36,16 @@ export default function HeritageSection() {
       <section className="bg-[#8B1A1A] py-10 px-6 md:px-10">
 
         <div className="flex items-center justify-center gap-6 md:gap-10">
-          <span className="text-[#C9A84C] text-2xl opacity-80 flex-shrink-0">
+          <span className="text-[#C9A84C] text-2xl opacity-80 shrink-0">
             ✦
           </span>
 
-          <p className="font-primary text-center text-white italic text-xl md:text-2xl leading-relaxed max-w-[54rem]">
+          <p className="font-primary text-center text-white italic text-xl md:text-2xl leading-relaxed max-w-\[54rem\]">
             A living sanctuary rooted in Sri Lankan heritage — crafted for those who seek culture,
             comfort, and authenticity.
           </p>
 
-          <span className="text-[#C9A84C] text-2xl opacity-80 flex-shrink-0">
+          <span className="text-[#C9A84C] text-2xl opacity-80 shrink-0">
             ✦
           </span>
         </div>
