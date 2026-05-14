@@ -15,6 +15,14 @@ const lato = Lato({
   variable: "--font-lato",
 });
 
+export const metadata = {
+  title: "Premo Heritage Villa",
+  description: "Luxury heritage villa in Sri Lanka",
+  icons: {
+    icon: "/favicon.png",
+  },
+};
+
 export default function RootLayout({
   children,
 }: {
