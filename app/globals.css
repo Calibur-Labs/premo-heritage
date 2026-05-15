@@ -20,6 +20,10 @@ body {
   font-family: var(--font-lato);
 }
 
+.font-poppins {
+  font-family: var(--font-poppins);
+}
+
 /* Color utilities */
 .text-primary {
   color: var(--color-primary);
