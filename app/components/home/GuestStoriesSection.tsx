@@ -26,7 +26,7 @@ const testimonials: Testimonial[] = [
       "An authentic experience like no other. The traditional cooking and warm hospitality made my stay unforgettable. Every detail reflects true Sri Lankan heritage.",
     name: "Sarah Williams",
     location: "United Kingdom",
-    avatar: "/test.png",
+    avatar: "home/test.png",
     initials: "SW",
   },
   {
@@ -34,7 +34,7 @@ const testimonials: Testimonial[] = [
       "The villa is a masterpiece of colonial architecture. We loved the open courtyards, hand-carved details, and the connection to nature. A true sanctuary.",
     name: "Michael Chen",
     location: "Singapore",
-    avatar: "/test.png",
+    avatar: "home/test.png",
     initials: "MC",
   },
   {
@@ -42,7 +42,7 @@ const testimonials: Testimonial[] = [
       "From the wood-fired meals to the Ayurvedic wellness sessions, every moment was magical. This is heritage tourism at its finest. We'll definitely return.",
     name: "Isabella Martinez",
     location: "Spain",
-    avatar: "/test.png",
+    avatar: "home/test.png",
     initials: "IM",
   },
   {
@@ -50,7 +50,7 @@ const testimonials: Testimonial[] = [
       "An authentic experience like no other. The traditional cooking and warm hospitality made my stay unforgettable. Every detail reflects true Sri Lankan heritage.",
     name: "Sarah Williams",
     location: "United Kingdom",
-    avatar: "/test.png",
+    avatar: "home/test.png",
     initials: "SW",
   },
   {
@@ -58,7 +58,7 @@ const testimonials: Testimonial[] = [
       "The villa is a masterpiece of colonial architecture. We loved the open courtyards, hand-carved details, and the connection to nature. A true sanctuary.",
     name: "Michael Chen",
     location: "Singapore",
-    avatar: "/test.png",
+    avatar: "home/test.png",
     initials: "MC",
   },
   {
@@ -66,7 +66,7 @@ const testimonials: Testimonial[] = [
       "From the wood-fired meals to the Ayurvedic wellness sessions, every moment was magical. This is heritage tourism at its finest. We'll definitely return.",
     name: "Isabella Martinez",
     location: "Spain",
-    avatar: "/test.png",
+    avatar: "home/test.png",
     initials: "IM",
   },
 ];
@@ -148,7 +148,7 @@ export default function GuestStoriesSection() {
           Guest Stories
         </h2>
 
-        <p className="mx-auto mt-3 max-w-2xl font-primary text-xl font-medium leading-8 text-gray-800">
+        <p className="mx-auto mt-3 max-w-2xl font-secondary text-[18px] font-medium leading-7 text-gray-800">
           Discover heartfelt experiences shared by guests who embraced the
           warmth, heritage, and timeless charm of Premo Heritage Villa.
         </p>
@@ -165,7 +165,7 @@ export default function GuestStoriesSection() {
                 {/* Quote Icon */}
                 <div className="absolute left-6 top-6">
                   <Image
-                    src="/quote.png"
+                    src="/home/quote.png"
                     alt="Quote icon"
                     width={40}
                     height={40}

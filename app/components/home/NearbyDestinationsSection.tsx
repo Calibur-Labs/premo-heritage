@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useEffect, useState, useCallback } from "react";
+import { MapPin } from "lucide-react";
 
 type Destination = {
   category: string;
@@ -15,100 +16,53 @@ type Destination = {
 type SlotStyle = {
   x: number;
   scale: number;
-  rotate: number;
   zIndex: number;
   opacity: number;
 };
+
+const AUTOPLAY_INTERVAL = 2000;
 
 const slugify = (str: string) =>
   str.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
 
 const destinations: Destination[] = [
-  {
-    category: "BEACH",
-    title: "Mirissa Beach",
-    location: "Mathara",
-    image: "/mobile/mirissa.jpeg",
-  },
-  {
-    category: "BEACH",
-    title: "Unawatuna Beach",
-    location: "Galle",
-    image: "/mobile/unawatuna.jpeg",
-  },
-  {
-    category: "BEACH",
-    title: "Thalpe Beach",
-    location: "Galle",
-    image: "/mobile/thalpe.jpeg",
-  },
-  {
-    category: "HIDDEN BEACH",
-    title: "Jungle Beach",
-    location: "Unawatuna",
-    image: "/mobile/junglebeach.jpeg",
-  },
-  {
-    category: "CULTURAL",
-    title: "Galle Fort",
-    location: "Galle",
-    image: "/mobile/fort.jpeg",
-  },
-  {
-    category: "TEMPLE",
-    title: "Japanese Peace Pagoda",
-    location: "Unawatuna",
-    image: "/mobile/pagoda.jpeg",
-  },
-  {
-    category: "NATURE",
-    title: "Sinharaja Forest Reserve",
-    location: "Sabaragamuwa",
-    image: "/mobile/sinharaja.jpeg",
-  },
-  {
-    category: "RAINFOREST",
-    title: "Kanneliya Forest Reserve",
-    location: "Galle",
-    image: "/mobile/kanneliya.jpeg",
-  },
-  {
-    category: "RIVER SAFARI",
-    title: "Madu Ganga",
-    location: "Balapitiya",
-    image: "/mobile/maduganga.jpeg",
-  },
-  {
-    category: "WILDLIFE",
-    title: "Sea Turtle Hatchery",
-    location: "Habaraduwa",
-    image: "/mobile/turtle.jpeg",
-  },
-  {
-    category: "SAFARI",
-    title: "Yala National Park",
-    location: "Katharagama",
-    image: "/mobile/yala.jpeg",
-  },
+  { category: "BEACH", title: "Mirissa Beach", location: "Matara", image: "/mobile/mirissa.jpeg" },
+  { category: "BEACH", title: "Unawatuna Beach", location: "Galle", image: "/mobile/unawatuna.jpeg" },
+  { category: "BEACH", title: "Thalpe Beach", location: "Galle", image: "/mobile/thalpe.jpeg" },
+  { category: "HIDDEN BEACH", title: "Jungle Beach", location: "Unawatuna", image: "/mobile/junglebeach.jpeg" },
+  { category: "CULTURAL", title: "Galle Fort", location: "Galle", image: "/mobile/fort.jpeg" },
+  { category: "TEMPLE", title: "Japanese Peace Pagoda", location: "Unawatuna", image: "/mobile/pagoda.jpeg" },
+  { category: "NATURE", title: "Sinharaja Forest Reserve", location: "Sabaragamuwa", image: "/mobile/sinharaja.jpeg" },
+  { category: "RAINFOREST", title: "Kanneliya Forest Reserve", location: "Galle", image: "/mobile/kanneliya.jpeg" },
+  { category: "RIVER SAFARI", title: "Madu Ganga", location: "Balapitiya", image: "/mobile/maduganga.jpeg" },
+  { category: "WILDLIFE", title: "Sea Turtle Hatchery", location: "Habaraduwa", image: "/mobile/turtle.jpeg" },
+  { category: "SAFARI", title: "Yala National Park", location: "Kataragama", image: "/mobile/yala.jpeg" },
 ];
 
 const SLOT_STYLES: SlotStyle[] = [
-  { x: -440, scale: 0.7, rotate: 0, zIndex: 1, opacity: 0.85 }, // far left
-  { x: -230, scale: 0.85, rotate: 0, zIndex: 2, opacity: 1 }, // mid left
-  { x: 0, scale: 1.05, rotate: 0, zIndex: 5, opacity: 1 }, // center (big)
-  { x: 230, scale: 0.85, rotate: 0, zIndex: 2, opacity: 1 }, // mid right
-  { x: 440, scale: 0.7, rotate: 0, zIndex: 1, opacity: 0.85 }, // far right
+  { x: -440, scale: 0.7, zIndex: 1, opacity: 0.85 }, // far left
+  { x: -230, scale: 0.85, zIndex: 2, opacity: 1 },   // mid left
+  { x: 0, scale: 1.05, zIndex: 5, opacity: 1 },      // center
+  { x: 230, scale: 0.85, zIndex: 2, opacity: 1 },    // mid right
+  { x: 440, scale: 0.7, zIndex: 1, opacity: 0.85 },  // far right
 ];
 
-const VISIBLE_SLOTS = SLOT_STYLES.length; 
+const VISIBLE_SLOTS = SLOT_STYLES.length;
+const CENTER_SLOT = Math.floor(VISIBLE_SLOTS / 2);
 
-export default function BestDestinationsSection() {
+const getSpacingScale = (width: number): number => {
+  if (width < 480) return 0.42;
+  if (width < 768) return 0.55;
+  if (width < 1280) return 0.78;
+  return 1;
+};
+
+export default function NearbyDestinationsSection() {
   const router = useRouter();
-  const [activeIndex, setActiveIndex] = useState<number>(0);
-  const [isPaused, setIsPaused] = useState<boolean>(false);
-  const [viewportWidth, setViewportWidth] = useState<number>(1200);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [viewportWidth, setViewportWidth] = useState(1200);
 
-  // Track viewport so we can scale spacing on small screens
+  // Track viewport size for responsive spacing
   useEffect(() => {
     const update = () => setViewportWidth(window.innerWidth);
     update();
@@ -116,51 +70,45 @@ export default function BestDestinationsSection() {
     return () => window.removeEventListener("resize", update);
   }, []);
 
-  // Auto-rotate — restarts cleanly whenever activeIndex changes (manual click
-  // or auto tick), so manual navigation doesn't cause an immediate jump.
+  // Autoplay loop — runs continuously, never pauses
   useEffect(() => {
-    if (isPaused) return;
-    const id = setTimeout(() => {
-      setActiveIndex((i) => (i + 1) % destinations.length);
-    }, 3500);
-    return () => clearTimeout(id);
-  }, [isPaused, activeIndex]);
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % destinations.length);
+    }, AUTOPLAY_INTERVAL);
 
-  // Figure out which slot (0..4) a card sits in given the current active index.
-  // Cards not in a visible slot return -1 (off-stage).
+    return () => clearInterval(interval);
+  }, []);
+
   const getSlotForCard = useCallback(
     (cardIndex: number): number => {
-      const half = Math.floor(VISIBLE_SLOTS / 2); // 2
       const total = destinations.length;
       let diff = (cardIndex - activeIndex + total) % total;
       if (diff > total / 2) diff -= total;
-      if (diff >= -half && diff <= half) {
-        return diff + half; // slot 0..4
+
+      if (diff >= -CENTER_SLOT && diff <= CENTER_SLOT) {
+        return diff + CENTER_SLOT;
       }
-      return -1; // hidden (off-stage)
+      return -1;
     },
     [activeIndex]
   );
 
-  // Responsive scaling factor for the slot offsets
-  const spacingScale =
-    viewportWidth < 480
-      ? 0.42
-      : viewportWidth < 768
-      ? 0.55
-      : viewportWidth < 1280
-      ? 0.78
-      : 1;
+  const goTo = (index: number) => {
+    setActiveIndex((index + destinations.length) % destinations.length);
+  };
 
-  const goTo = (i: number) =>
-    setActiveIndex((i + destinations.length) % destinations.length);
+  const handleCardClick = (dest: Destination, index: number, isCenter: boolean) => {
+    if (isCenter) {
+      router.push(`/destinations#${slugify(dest.title)}`);
+    } else {
+      goTo(index);
+    }
+  };
+
+  const spacingScale = getSpacingScale(viewportWidth);
 
   return (
-    <section
-      className="best-destinations-wrapper overflow-hidden bg-white py-24"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
+    <section className="best-destinations-wrapper overflow-hidden bg-white py-24">
       {/* Heading */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -169,17 +117,15 @@ export default function BestDestinationsSection() {
         viewport={{ once: true }}
         className="text-center"
       >
-        <h2
-          className="font-primary text-5xl font-black text-primary md:text-6xl" >
+        <h2 className="font-primary text-5xl font-black text-primary md:text-6xl">
           Nearby Destinations
         </h2>
-
-        <p className="mx-auto mt-3 max-w-2xl font-primary text-xl font-medium leading-8 text-gray-800">
+        <p className="mx-auto mt-3 max-w-2xl px-6 font-secondary text-[16px] font-medium leading-7 text-gray-800">
           Explore breathtaking beaches, cultural landmarks, rainforests, and unforgettable experiences located near Premo Heritage Villa.
         </p>
       </motion.div>
 
-      {/* Stage */}
+      {/* Carousel */}
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -191,64 +137,37 @@ export default function BestDestinationsSection() {
           {destinations.map((dest, index) => {
             const slot = getSlotForCard(index);
             const isVisible = slot !== -1;
-            const isCenter = slot === 2;
+            const isCenter = slot === CENTER_SLOT;
 
-            // Off-stage cards: park them where they'll come back in from
-            // to keep the rotation feeling circular.
-            const offstageX =
-              (index - activeIndex + destinations.length) % destinations.length >
-              destinations.length / 2
-                ? -640
-                : 640;
+            const total = destinations.length;
+            const distance = (index - activeIndex + total) % total;
+            const offstageX = distance > total / 2 ? -640 : 640;
 
-            // Narrow with a local const so TS knows it's non-null inside the branch
-            let target: {
-              x: number;
-              scale: number;
-              rotate: number;
-              opacity: number;
-            };
-            let zIndex: number;
+            const target = isVisible
+              ? {
+                  x: SLOT_STYLES[slot].x * spacingScale,
+                  scale: SLOT_STYLES[slot].scale,
+                  opacity: SLOT_STYLES[slot].opacity,
+                }
+              : {
+                  x: offstageX * spacingScale,
+                  scale: 0.55,
+                  opacity: 0,
+                };
 
-            if (isVisible) {
-              const style: SlotStyle = SLOT_STYLES[slot];
-              target = {
-                x: style.x * spacingScale,
-                scale: style.scale,
-                rotate: style.rotate,
-                opacity: style.opacity,
-              };
-              zIndex = style.zIndex;
-            } else {
-              target = {
-                x: offstageX * spacingScale,
-                scale: 0.55,
-                rotate: 0,
-                opacity: 0,
-              };
-              zIndex = 0;
-            }
+            const zIndex = isVisible ? SLOT_STYLES[slot].zIndex : 0;
 
             return (
               <motion.div
-                key={index}
+                key={dest.title}
                 className="best-dest-slot"
                 style={{ zIndex }}
                 animate={target}
-                transition={{
-                  duration: 0.9,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
+                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
               >
                 <div
                   className={`best-dest-card ${isCenter ? "is-center" : ""}`}
-                  onClick={() => {
-                    if (isCenter) {
-                      router.push(`/destinations#${slugify(dest.title)}`);
-                    } else {
-                      goTo(index);
-                    }
-                  }}
+                  onClick={() => handleCardClick(dest, index, isCenter)}
                 >
                   <div className="best-dest-img-wrap">
                     <Image
@@ -271,26 +190,7 @@ export default function BestDestinationsSection() {
 
                   <div className="best-dest-content">
                     <div className="best-dest-location">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="12"
-                        height="12"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0L6.343 16.657a8 8 0 1111.314 0z"
-                        />
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                        />
-                      </svg>
+                      <MapPin size={12} strokeWidth={2} />
                       <span>{dest.location}</span>
                     </div>
                     <h3 className="best-dest-title">{dest.title}</h3>
@@ -304,7 +204,7 @@ export default function BestDestinationsSection() {
 
         {/* Dots */}
         <div className="best-dest-dots">
-          {destinations.map((_, i: number) => (
+          {destinations.map((_, i) => (
             <button
               key={i}
               aria-label={`Go to slide ${i + 1}`}
@@ -320,7 +220,6 @@ export default function BestDestinationsSection() {
           overflow: hidden !important;
         }
 
-        /* ── Stage ── */
         .best-dest-stage {
           position: relative;
           padding: 10px 0 30px;
@@ -335,7 +234,6 @@ export default function BestDestinationsSection() {
           justify-content: center;
         }
 
-        /* ── Each card slot sits on top of center, animated by Framer Motion ── */
         .best-dest-slot {
           position: absolute;
           top: 50%;
@@ -347,7 +245,6 @@ export default function BestDestinationsSection() {
           will-change: transform, opacity;
         }
 
-        /* ── Card ── */
         .best-dest-card {
           position: relative;
           width: 100%;
@@ -376,7 +273,6 @@ export default function BestDestinationsSection() {
           transform: scale(1.05);
         }
 
-        /* ── Gradient ── */
         .best-dest-overlay {
           position: absolute;
           inset: 0;
@@ -389,7 +285,6 @@ export default function BestDestinationsSection() {
           border-radius: 22px;
         }
 
-        /* ── Badge (center card only) ── */
         .best-dest-badge-wrap {
           position: absolute;
           top: 16px;
@@ -413,7 +308,6 @@ export default function BestDestinationsSection() {
           white-space: nowrap;
         }
 
-        /* ── Bottom text ── */
         .best-dest-content {
           position: absolute;
           bottom: 0;
@@ -431,11 +325,6 @@ export default function BestDestinationsSection() {
           font-size: 11px;
           font-family: sans-serif;
           margin-bottom: 6px;
-        }
-
-        .best-dest-location svg {
-          flex-shrink: 0;
-          color: rgba(255, 255, 255, 0.7);
         }
 
         .best-dest-title {
@@ -456,7 +345,6 @@ export default function BestDestinationsSection() {
           margin: 0;
         }
 
-        /* ── Dots ── */
         .best-dest-dots {
           display: flex;
           justify-content: center;
@@ -482,7 +370,6 @@ export default function BestDestinationsSection() {
           width: 24px;
         }
 
-        /* ── Responsive heights ── */
         @media (max-width: 1280px) {
           .best-dest-track {
             height: 440px;

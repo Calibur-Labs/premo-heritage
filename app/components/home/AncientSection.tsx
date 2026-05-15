@@ -8,7 +8,7 @@ export default function AncientSection() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: "url('/Fallback.png')",
+          backgroundImage: "url('/home/Fallback.png')",
         }}
       />
 

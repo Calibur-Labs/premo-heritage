@@ -5,7 +5,7 @@ export default function HeritageSection() {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           
             <img
-              src="/lipa.png"
+              src="/home/lipa.png"
               alt="Heritage cooking"
               className="w-[85%] mx-auto object-cover rounded-[10px]"
             />
@@ -19,12 +19,16 @@ export default function HeritageSection() {
               A Villa Born from Tradition
             </h2>
 
-            <p className="text-gray-600 mb-4 leading-relaxed max-w-xl">
-              Nestled in the heart of Sri Lanka, Premo Heritage Villa stands as a testament to centuries-old traditions. Our villa embodies the authentic spirit of Sri Lankan culture, where every meal is prepared using ancestral methods — clay pots over wood fire, hand-ground spices, and fresh herbs from our garden.
+            <p className="text-gray-600 text-[18px] mb-4 leading-relaxed max-w-2xl">
+              Premo Heritage Villa blends Sri Lankan tradition with modern luxury, offering a peaceful stay surrounded by authentic heritage charm. The villa reflects traditional architecture, wooden craftsmanship, and a warm cultural atmosphere inspired by village life.
             </p>
 
-            <p className="text-gray-600 mb-6 leading-relaxed max-w-xl">
-              Each element of our villa tells a story, from the hand-carved wooden pillars to the traditional terracotta roof tiles. We invite you to experience a living heritage that honors the past while embracing the present.
+            <p className="text-gray-600 text-[18px] mb-6 leading-relaxed max-w-2xl">
+              Guests can enjoy authentic Sri Lankan cuisine prepared using clay pots, firewood stoves, and traditional cooking methods that bring rich local flavors to every meal. From traditional rice and curry to local delicacies, each dish offers a true taste of Sri Lankan culture.
+            </p>
+
+            <p className="text-gray-600 text-[18px] mb-6 leading-relaxed max-w-2xl">
+              Surrounded by tropical tranquility, the villa provides a relaxing and luxurious escape filled with comfort, culture, and unforgettable experiences.
             </p>
 
             <div className="w-36 h-\[2px\] bg-[#b89b5e]"></div>
